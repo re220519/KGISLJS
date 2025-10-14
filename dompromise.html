@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lan="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width" initial-scale="1.0">
+        <title>DOMPROMISE</title>
+    </head>
+    <body>
+<!--Create a button "Load Message". On click, trigger a Promise that resolves after 2 secondsand displays "Message Loaded!" in the browser.-->
+        <button id="btn">Load message</button>
+        <p id="para"></p>
+<!--Use Promises to simulate "Loading..." → "Processing..." → "Completed!" text updates on the screen.-->
+        <h4 id="btnprocess">buttton</h4>
+<!--Make a Promise that waits 5 seconds and then shows "Welcome to My Page" in an <h1> element.--> 
+         <h1 id="heading">WELCOME</h1> 
+<!--Display "Fetching User..." in a div, and after 2 seconds, resolve a Promise that replaces it with "User Found!".--> 
+        <div id="container">Fetching user...</div>
+<!--Create a Promise that fetches random color values and changes the background color after 3 seconds.-->
+        <script>
+            button1= document.getElementById("btn");
+            para1= document.getElementById("para")
+            button1.addEventListener("click",function(){
+            para1.innerText = "Loading...";
+            })
+            buttonPromise =new Promise((response,reject)=>{
+                setTimeout(()=>{
+                    response("Message Loaded");
+                },5000);
+            })
+            buttonPromise.then((value)=>{
+                para1.innerText=value;
+            })
+            button2= document.getElementById("btnprocess");
+            button2.addEventListener("click",function(){
+            //button2.textContent=loadPromise;
+            //})
+            loadPromise= new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    button2.textContent="Loading....";
+                    resolve("Loading")
+                },1000)
+            })
+            .then((message)=>{  
+                return new Promise((resolve,reject)=>{
+                    setTimeout(()=>{
+                        button2.textContent="Processing..."
+                        resolve("processing");
+                    },1000)
+                })
+            .then((message)=>{
+                    return new Promise((resolve,reject)=>{
+                    setTimeout(()=>{
+                        button2.textContent="Compleeted..."
+                        resolve("compleeted");
+                    },1000)
+                })
+                })              
+            })})
+            heading1=document.getElementById("heading");
+            const heading= new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    resolve("Welcome to my page");
+                },5000)
+            })
+            heading.then((value)=>{
+                 heading1.textContent=value;
+            })
+            fetch1=document.getElementById("container");
+            const fetching= new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    resolve("User Found");
+                },2000)
+            })
+            fetching.then((value)=>{
+                fetch1.textContent=value;
+            })
+        </script>
+    </body>
+</html>
